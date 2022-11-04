@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    environment {
+        NAME= 'yaniv'
+    }
+    stages {
+        stage('fetching'){
+            steps {
+                timeout(time: 5 ,unit: 'SECONDS')
+                {
+                sh '''
+                echo NAME
+                echo "Hello world"
+                ls
+                '''
+                }
+            }
+        }
+        stage('build'){
+            steps{
+                timeout(time: 10, unit: 'SECONDS'){
+                        retry(3){
+
+                }
+                retry (3){
+                    sh '''
+                    sleep 3
+                    echo "Done"
+                    echo "inside retry"
+                    '''
+                }}
+        
+            }
+        }
+    }
+}
